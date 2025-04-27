@@ -152,6 +152,11 @@ class Upload extends Input
 
                 error_log("KOMAR Count: ".count($postFiles));
 
+                $jsRes = $fx(...$postFiles);
+                if ($jsRes !== null) { // @phpstan-ignore notIdentical.alwaysTrue (https://github.com/phpstan/phpstan/issues/9388)
+                    $this->addJsAction($jsRes);
+                }
+
                 if ($this->multiple){
                     foreach($postFiles as $postFile) {
                         $this->addJsAction($this->js()->atkFileUpload('updateField', [$postFile['name'], $postFile['name']]));
@@ -165,10 +170,6 @@ class Upload extends Input
                     $this->setInputValue($fileId);
                 }
 
-                $jsRes = $fx(...$postFiles);
-                if ($jsRes !== null) { // @phpstan-ignore notIdentical.alwaysTrue (https://github.com/phpstan/phpstan/issues/9388)
-                    $this->addJsAction($jsRes);
-                }
 
                 if (count($postFiles) > 0 && reset($postFiles)['error'] === 0) {
                     $this->addJsAction(
@@ -182,7 +183,7 @@ class Upload extends Input
     }
 
     /**
-     * Call when user is removing an already upload file.
+     * Call when user is removing an already uploaded file.
      *
      * @param \Closure(string): JsExpressionable $fx
      */
