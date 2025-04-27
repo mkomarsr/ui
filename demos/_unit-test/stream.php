@@ -138,7 +138,7 @@ $hugePseudoStreamClass = AnonymousClassNameCache::get_class(fn () => new class(s
     }
 
     #[\Override]
-    public function getMetadata($key = null)
+    public function getMetadata($key = null): string
     {
         $this->throwNotSupported();
     }
