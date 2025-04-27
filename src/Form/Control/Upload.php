@@ -64,6 +64,7 @@ class Upload extends Input
     protected function init(): void
     {
         parent::init();
+        error_log("xxx - init upload bro");
 
         $this->cb = JsCallback::addTo($this);
 
