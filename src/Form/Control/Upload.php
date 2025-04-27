@@ -79,6 +79,7 @@ class Upload extends Input
     /**
      * @param string      $fileId   Field ID for onDelete Callback
      * @param string|null $fileName Field name display to user
+     * @noinspection PhpParameterNameChangedDuringInheritanceInspection
      */
     #[\Override]
     public function set($fileId = null, $fileName = null)
@@ -130,11 +131,10 @@ class Upload extends Input
                 for ($i = 0;; ++$i) {
                     $k = 'file' . ($i > 0 ? '-' . $i : '');
                     $uploadFile = $this->getApp()->tryGetRequestUploadedFile($k);
-                    error_log("KOMAR$i: ".print_r($uploadFile->getClientFilename(), true));
-                    // populate array here KOMAR
                     if ($uploadFile === null) {
                         break;
                     }
+                    error_log("KOMAR$i: ".print_r($uploadFile->getClientFilename(), true));
 
                     $postFile = [
                         'name' => $uploadFile->getClientFilename(),
