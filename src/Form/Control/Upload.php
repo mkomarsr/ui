@@ -127,13 +127,13 @@ class Upload extends Input
         if ($this->getApp()->tryGetRequestPostParam('fUploadAction') === self::UPLOAD_ACTION) {
             $this->cb->set(function () use ($fx) {
                 $postFiles = [];
-                error_log("KOMAR1: ".print_r($fx, true));
-                error_log("KOMAR2: ".print_r($this->getApp()->tryGetRequestUploadedFile('file')->getClientFilename(), true));
-                error_log("KOMAR3: ".print_r($this->getApp()->tryGetRequestUploadedFile('file-1')->getClientFilename(), true));
-                error_log("KOMAR4: ".print_r($this->getApp()->tryGetRequestUploadedFile('file-2')->getClientFilename(), true));
+                error_log("KOMAR1: ".print_r($this->getApp()->tryGetRequestUploadedFile('file')->getClientFilename(), true));
+                error_log("KOMAR2: ".print_r($this->getApp()->tryGetRequestUploadedFile('file-1')->getClientFilename(), true));
+                error_log("KOMAR3: ".print_r($this->getApp()->tryGetRequestUploadedFile('file-2')->getClientFilename(), true));
                 for ($i = 0;; ++$i) {
                     $k = 'file' . ($i > 0 ? '-' . $i : '');
                     $uploadFile = $this->getApp()->tryGetRequestUploadedFile($k);
+                    // populate array here KOMAR
                     if ($uploadFile === null) {
                         break;
                     }
@@ -151,6 +151,8 @@ class Upload extends Input
                     }
                     $postFiles[] = $postFile;
                 }
+
+                error_log("KOMAR Count: ".count($postFiles));
 
                 if (count($postFiles) > 0) {
                     $fileId = reset($postFiles)['name'];
