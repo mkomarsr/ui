@@ -152,6 +152,13 @@ class Upload extends Input
 
                 error_log("KOMAR Count: ".count($postFiles));
 
+                if ($this->multiple){
+                    foreach($postFiles as $postFile) {
+                        $this->addJsAction($this->js()->atkFileUpload('updateField', [$postFile['name'], $postFile['type'].$postFile['size']]));
+                    }
+                    return new JsBlock($this->jsActions);
+                }
+
                 if (count($postFiles) > 0) {
                     $fileId = reset($postFiles)['name'];
                     $this->setFileId($fileId);
