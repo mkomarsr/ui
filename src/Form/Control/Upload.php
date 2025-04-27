@@ -127,6 +127,7 @@ class Upload extends Input
         $this->hasUploadCb = true;
         if ($this->getApp()->tryGetRequestPostParam('fUploadAction') === self::UPLOAD_ACTION) {
             $this->cb->set(function () use ($fx) {
+                error_log("KOMARXXXXXXXX: ".print_r($fx, true));
                 $postFiles = [];
                 for ($i = 0;; ++$i) {
                     $k = 'file' . ($i > 0 ? '-' . $i : '');
