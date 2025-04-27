@@ -154,7 +154,7 @@ class Upload extends Input
 
                 if ($this->multiple){
                     foreach($postFiles as $postFile) {
-                        $this->addJsAction($this->js()->atkFileUpload('updateField', [$postFile['name'], $postFile['type'].$postFile['size']]));
+                        $this->addJsAction($this->js()->atkFileUpload('updateField', [$postFile['name'], $postFile['name']]));
                     }
                     return new JsBlock($this->jsActions);
                 }
